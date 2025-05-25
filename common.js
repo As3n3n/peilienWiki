@@ -1636,14 +1636,35 @@ setupSyntaxChecker () {
 // Twemoji変換
 //----------
 
+
 setupTwemoji () {
-    document.addEventListener('DOMContentLoaded', () => {
-        const target = document.querySelector('div.user-area') || document.body;
-        if (typeof twemoji !== 'undefined' && target) {
-            twemoji.parse(target, {
-                folder: 'svg',
-                ext: '.svg'
-            });
+  document.addEventListener('DOMContentLoaded', () => {
+    const target = document.querySelector('div.user-area') || document.body;
+
+    // twemojiが未読み込みならCDNから読み込む
+    if (typeof twemoji === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://twemoji.maxcdn.com/v/latest/twemoji.min.js';
+      script.onload = () => {
+        if (target) {
+          twemoji.parse(target, {
+            folder: 'svg',
+            ext: '.svg'
+          });
+        }
+      };
+      document.head.appendChild(script);
+    } else {
+      if (target) {
+        twemoji.parse(target, {
+          folder: 'svg',
+          ext: '.svg'
+        });
+      }
+    }
+  });
+} // setupTwemoji
+);
         } else {
             console.warn('twemoji not loaded or target not found');
         }
