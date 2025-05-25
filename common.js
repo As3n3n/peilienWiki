@@ -1949,5 +1949,18 @@ class MyURLSearchParams {
 
 // Wiki拡張を適用
 window.wikiExtension = new WikiExtension()
+// Twemoji読み込み
+(function() {
+    var script = document.createElement('script');
+    script.src = 'https://twemoji.maxcdn.com/v/latest/twemoji.min.js';
+    script.crossOrigin = 'anonymous';
+    script.onload = function() {
+        if (window.wikiExtension && typeof window.wikiExtension.setupTwemoji === 'function') {
+            window.wikiExtension.setupTwemoji();
+        }
+    };
+    document.head.appendChild(script);
+})();
+
 
 })()
