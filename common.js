@@ -63,6 +63,7 @@ setup () {
         this.setupAutoFilter() // 歌唱楽曲一覧ページなど
         this.setupDataPageRedirector() // データページからのリダイレクト
         this.setupThumbnailColumn()
+        this.setupTwemoji() // twemoji
         if (!this.isMobileLayout) {
             this.setupTableFilterGenerator() // 右メニュー
         }
@@ -1630,6 +1631,19 @@ setupSyntaxChecker () {
     }
 
 } // setupSyntaxChecker
+
+//----------
+// Twemoji変換
+//----------
+
+setupTwemoji () {
+    const target = document.querySelector('div.user-area');
+    if (!target) return;
+    twemoji.parse(target, {
+        folder: 'svg',
+        ext: '.svg'
+    });
+} // setupTwemoji
 
 //----------
 // メンバー情報 (編集ツールで使用)
