@@ -1636,40 +1636,32 @@ setupSyntaxChecker () {
 // Twemoji変換
 //----------
 
-
 setupTwemoji () {
-  document.addEventListener('DOMContentLoaded', () => {
     const target = document.querySelector('div.user-area') || document.body;
 
-    // twemojiが未読み込みならCDNから読み込む
-    if (typeof twemoji === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://twemoji.maxcdn.com/v/latest/twemoji.min.js';
-      script.onload = () => {
-        if (target) {
-          twemoji.parse(target, {
-            folder: 'svg',
-            ext: '.svg'
-          });
-        }
-      };
-      document.head.appendChild(script);
-    } else {
-      if (target) {
-        twemoji.parse(target, {
-          folder: 'svg',
-          ext: '.svg'
-        });
-      }
-    }
-  });
-} // setupTwemoji
-);
+    const renderTwemoji = () => {
+        if (typeof twemoji !== 'undefined' && target) {
+            twemoji.parse(target, {
+                folder: 'svg',
+                ext: '.svg'
+            });
         } else {
             console.warn('twemoji not loaded or target not found');
         }
-    });
-}// setupTwemoji
+    };
+
+    // 既にtwemojiが読み込まれている場合すぐ実行
+    if (typeof twemoji !== 'undefined') {
+        renderTwemoji();
+    } else {
+        // 読み込まれていなければCDNから取得
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/twemoji@latest/dist/twemoji.min.js';
+        script.onload = () => renderTwemoji();
+        document.head.appendChild(script);
+    }
+} // setupTwemoji
+
 
 //----------
 // メンバー情報 (編集ツールで使用)
