@@ -1,2 +1,2 @@
 # peilienWiki
-peilien非公式Wikiで使用しているJS、CSSファイルの管理プロジェクトです。
+[peilien非公式Wiki](https://seesaawiki.jp/peilien/) で使用しているJS、CSSファイルの管理プロジェクトです。
