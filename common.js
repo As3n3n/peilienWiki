@@ -1637,13 +1637,18 @@ setupSyntaxChecker () {
 //----------
 
 setupTwemoji () {
-    const target = document.querySelector('div.user-area');
-    if (!target) return;
-    twemoji.parse(target, {
-        folder: 'svg',
-        ext: '.svg'
+    document.addEventListener('DOMContentLoaded', () => {
+        const target = document.querySelector('div.user-area') || document.body;
+        if (typeof twemoji !== 'undefined' && target) {
+            twemoji.parse(target, {
+                folder: 'svg',
+                ext: '.svg'
+            });
+        } else {
+            console.warn('twemoji not loaded or target not found');
+        }
     });
-} // setupTwemoji
+}// setupTwemoji
 
 //----------
 // メンバー情報 (編集ツールで使用)
