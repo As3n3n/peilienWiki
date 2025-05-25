@@ -1977,3 +1977,24 @@ window.wikiExtension = new WikiExtension()
 
 
 })()
+
+//----------
+// Twemojiライブラリの読み込み（存在しない場合のみ）
+//----------
+(function loadTwemojiIfNeeded() {
+  if (typeof twemoji === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js';
+    script.crossOrigin = 'anonymous';
+    script.onload = () => {
+      if (typeof twemoji !== 'undefined') {
+        twemoji.parse(document.body, { folder: 'svg', ext: '.svg' });
+        console.log('Twemoji loaded and parsed.');
+      }
+    };
+    document.head.appendChild(script);
+  } else {
+    twemoji.parse(document.body, { folder: 'svg', ext: '.svg' });
+    console.log('Twemoji already available and parsed.');
+  }
+})();
