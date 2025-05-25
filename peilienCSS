@@ -1,0 +1,1246 @@
+@charset "UTF-8";
+/* ----------------------------------------------------------------------------------------------------------------
+ 2022.09.29 しぐれうい非公式wiki用にコピー kitten
+ 2022.10.01 フォント変更 kitten
+ 2023.08.19 ページ一覧縞模様 kitten
+ 2025.05.10 ペイリアン非公式wiki用にコピー＆更新
+---------------------------------------------------------------------------------------------------------------- */
+
+/* 新しい絵文字への対応 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap");
+/* 2.0, 4.0: Eye in Speech Bubble */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap&text=%F0%9F%91%81%EF%B8%8F%E2%80%8D%F0%9F%97%A8%EF%B8%8F");
+
+@font-face {
+  font-family: sans-serif-specials;
+  font-style: normal;
+  font-weight: normal;
+  src:
+    local(Verdana), /* Windows/macOS/iOSで使える、site.cssで指定されているフォント */
+    /* sans-serif指定ができないので以降列挙 */
+    local(-apple-system), local(BlinkMacSystemFont), /* macOSのデフォルト、正体はSan Francisco */
+    local('Segoe UI Bold'), /* Windowsの英字デフォルト */
+    local(Roboto), /* 2013年以降のAndroidの英字デフォルト */
+    local(Arial); /* Windows/macOS/iOSで使える */
+  unicode-range: U+20, U+23, U+2A, U+30-39, U+A9, U+AE; /* SP, #, *, 0-9, (C), (R) */
+}
+@font-face {
+  font-family: sans-serif-specials;
+  font-style: normal;
+  font-weight: bold; /* normalの定義だけだと太字は太字用ではなく通常フォントが引き伸ばされる（なくてもいい） */
+  src:
+    local('Verdana Bold'), /* Windows/macOS/iOSで使える、site.cssで指定されているフォント */
+    /* sans-serif指定ができないので以降列挙 */
+    local(-apple-system), local(BlinkMacSystemFont), /* macOSのデフォルト、正体はSan Francisco */
+    local('Segoe UI'), /* Windowsの英字デフォルト */
+    local(Roboto), /* 2013年以降のAndroidの英字デフォルト */
+    local('Arial Bold'); /* Windows/macOS/iOSで使える */
+  unicode-range: U+20, U+23, U+2A, U+30-39, U+A9, U+AE; /* SP, #, *, 0-9, (C), (R) */
+}
+
+body {
+  /* 参考
+    https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88
+    https://qiita.com/tsuka-rinorino/items/b30e03ce10aa38ac2a10
+  */
+  --default-font-family: 
+    sans-serif-specials, /* テキストスタイル優先の文字 */
+    'Apple Color Emoji', /* macOS/iOSの絵文字 */
+    'Noto Color Emoji', /* 主にAndroidの絵文字（WebFontで読み込んでいる） */
+    Verdana, sans-serif; /* site.cssで指定されているフォント */
+  font-family: var(--custom-font-family, var(--default-font-family));
+}
+/* 枠無しテーブル用 */
+div.user-area table.noborder th,
+div.user-area table.noborder td {
+  border: none;
+}
+
+/* スクロールバー付テーブル生成 */
+.x-scroller {
+  overflow-x: auto;
+}
+.y-scroller {
+  max-height:300px;
+  overflow-y: auto;
+}
+
+/* テーブル交互色替え */
+div.user-area table td {
+  background: unset;
+}
+
+div.user-area table.stripe tbody tr.odd {
+  background-color: #f1f1f1;
+}
+
+/* 縦書き */
+div.user-area table th {
+  -ms-writing-mode: var(--th-writing-mode,inherit);
+  writing-mode: var(--th-writing-mode,inherit);
+}
+
+/* カラム非表示 */
+table.hide-1 th:nth-child(1), table.hide-1 td:nth-child(1),
+table.hide-2 th:nth-child(2), table.hide-2 td:nth-child(2),
+table.hide-3 th:nth-child(3), table.hide-3 td:nth-child(3),
+table.hide-4 th:nth-child(4), table.hide-4 td:nth-child(4),
+table.hide-5 th:nth-child(5), table.hide-5 td:nth-child(5),
+table.hide-6 th:nth-child(6), table.hide-6 td:nth-child(6),
+table.hide-7 th:nth-child(7), table.hide-7 td:nth-child(7),
+table.hide-8 th:nth-child(8), table.hide-8 td:nth-child(8),
+table.hide-9 th:nth-child(9), table.hide-9 td:nth-child(9),
+table.hide-10 th:nth-child(10), table.hide-10 td:nth-child(10),
+table.hide-11 th:nth-child(11), table.hide-11 td:nth-child(11),
+table.hide-12 th:nth-child(12), table.hide-12 td:nth-child(12),
+table.hide-13 th:nth-child(13), table.hide-13 td:nth-child(13),
+table.hide-14 th:nth-child(14), table.hide-14 td:nth-child(14),
+table.hide-15 th:nth-child(15), table.hide-15 td:nth-child(15),
+table.hide-16 th:nth-child(16), table.hide-16 td:nth-child(16),
+table.hide-17 th:nth-child(17), table.hide-17 td:nth-child(17),
+table.hide-18 th:nth-child(18), table.hide-18 td:nth-child(18),
+table.hide-19 th:nth-child(19), table.hide-19 td:nth-child(19),
+table.hide-20 th:nth-child(20), table.hide-20 td:nth-child(20) {
+  display: none;
+}
+
+/* --- 以下は装飾系 (CSS_01) --- */
+/* 2022.10.01 discordサーバに話し合いの内容 kitten */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap&text=%E3%81%97%E3%81%90%E3%82%8C%E3%81%86%E3%81%84%E9%9D%9E%E5%85%AC%E5%BC%8Fwiki%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8%E4%B8%80%E8%A6%A7%E3%83%A1%E3%83%B3%E3%83%90%E6%8E%B2%E7%A4%BA%E6%9D%BF%E7%B7%A8%E9%9B%86');
+
+/* https://necomesi.jp/blog/tsmd/posts/154 */
+
+/*2023.08.19 ページ一覧縞模様 kitten*/
+div#page-body-inner .page-list .even {
+	background-color:#ffd0d0;
+}
+/*2023.08.19 */
+
+@font-face
+  {
+    font-family: EmojiFamily;
+    src: local("Segoe UI Emoji"),
+       local("Segoe UI Symbol"),
+       local("Apple Color Emoji"),
+       local("Noto Color Emoji"),
+       local("Noto Emoji");
+    unicode-range: /*U+23, U+2A, U+30-39,*/U+A9, U+AE, U+200D, U+203C, U+2049, U+20E3, U+2122, U+2139, U+2194-2199, U+21A9-21AA, U+231A-231B, U+2328, U+23CF, U+23E9-23F3, U+23F8-23FA, U+24C2, U+25AA-25AB, U+25B6, U+25C0, U+25FB-25FE, U+2600-2604, U+260E, U+2611, U+2614-2615, U+2618, U+261D, U+2620, U+2622-2623, U+2626, U+262A, U+262E-262F, U+2638-263A, U+2640, U+2642, U+2648-2653, U+2660, U+2663, U+2665-2666, U+2668, U+267B, U+267F, U+2692-2697, U+2699, U+269B-269C, U+26A0-26A1, U+26AA-26AB, U+26B0-26B1, U+26BD-26BE, U+26C4-26C5, U+26C8, U+26CE-26CF, U+26D1, U+26D3-26D4, U+26E9-26EA, U+26F0-26F5, U+26F7-26FA, U+26FD, U+2702, U+2705, U+2708-270D, U+270F, U+2712, U+2714, U+2716, U+271D, U+2721, U+2728, U+2733-2734, U+2744, U+2747, U+274C, U+274E, U+2753-2755, U+2757, U+2763-2764, U+2795-2797, U+27A1, U+27B0, U+27BF, U+2934-2935, U+2B05-2B07, U+2B1B-2B1C, U+2B50, U+2B55, U+3030, U+303D, U+3297, U+3299, U+FE0F, U+1F004, U+1F0CF, U+1F170-1F171, U+1F17E-1F17F, U+1F18E, U+1F191-1F19A, U+1F1E6-1F1FF, U+1F201-1F202, U+1F21A, U+1F22F, U+1F232-1F23A, U+1F250-1F251, U+1F300-1F321, U+1F324-1F393, U+1F396-1F397, U+1F399-1F39B, U+1F39E-1F3F0, U+1F3F3-1F3F5, U+1F3F7-1F4FD, U+1F4FF-1F53D, U+1F549-1F54E, U+1F550-1F567, U+1F56F-1F570, U+1F573-1F57A, U+1F587, U+1F58A-1F58D, U+1F590, U+1F595-1F596, U+1F5A4-1F5A5, U+1F5A8, U+1F5B1-1F5B2, U+1F5BC, U+1F5C2-1F5C4, U+1F5D1-1F5D3, U+1F5DC-1F5DE, U+1F5E1, U+1F5E3, U+1F5E8, U+1F5EF, U+1F5F3, U+1F5FA-1F64F, U+1F680-1F6C5, U+1F6CB-1F6D2, U+1F6E0-1F6E5, U+1F6E9, U+1F6EB-1F6EC, U+1F6F0, U+1F6F3-1F6F8, U+1F910-1F93A, U+1F93C-1F93E, U+1F940-1F945, U+1F947-1F94C, U+1F950-1F96B, U+1F980-1F997, U+1F9C0, U+1F9D0-1F9E6, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073-E0074, U+E0077, U+E007F;
+  }
+
+@font-face
+  {
+    font-family: EmojiFamily;
+    font-weight: bold;
+    src: local("Segoe UI Emoji"),
+       local("Segoe UI Symbol"),
+       local("Apple Color Emoji"),
+       local("Noto Color Emoji")
+       local("Noto Emoji");
+    unicode-range: /*U+23, U+2A, U+30-39,*/U+A9, U+AE, U+200D, U+203C, U+2049, U+20E3, U+2122, U+2139, U+2194-2199, U+21A9-21AA, U+231A-231B, U+2328, U+23CF, U+23E9-23F3, U+23F8-23FA, U+24C2, U+25AA-25AB, U+25B6, U+25C0, U+25FB-25FE, U+2600-2604, U+260E, U+2611, U+2614-2615, U+2618, U+261D, U+2620, U+2622-2623, U+2626, U+262A, U+262E-262F, U+2638-263A, U+2640, U+2642, U+2648-2653, U+2660, U+2663, U+2665-2666, U+2668, U+267B, U+267F, U+2692-2697, U+2699, U+269B-269C, U+26A0-26A1, U+26AA-26AB, U+26B0-26B1, U+26BD-26BE, U+26C4-26C5, U+26C8, U+26CE-26CF, U+26D1, U+26D3-26D4, U+26E9-26EA, U+26F0-26F5, U+26F7-26FA, U+26FD, U+2702, U+2705, U+2708-270D, U+270F, U+2712, U+2714, U+2716, U+271D, U+2721, U+2728, U+2733-2734, U+2744, U+2747, U+274C, U+274E, U+2753-2755, U+2757, U+2763-2764, U+2795-2797, U+27A1, U+27B0, U+27BF, U+2934-2935, U+2B05-2B07, U+2B1B-2B1C, U+2B50, U+2B55, U+3030, U+303D, U+3297, U+3299, U+FE0F, U+1F004, U+1F0CF, U+1F170-1F171, U+1F17E-1F17F, U+1F18E, U+1F191-1F19A, U+1F1E6-1F1FF, U+1F201-1F202, U+1F21A, U+1F22F, U+1F232-1F23A, U+1F250-1F251, U+1F300-1F321, U+1F324-1F393, U+1F396-1F397, U+1F399-1F39B, U+1F39E-1F3F0, U+1F3F3-1F3F5, U+1F3F7-1F4FD, U+1F4FF-1F53D, U+1F549-1F54E, U+1F550-1F567, U+1F56F-1F570, U+1F573-1F57A, U+1F587, U+1F58A-1F58D, U+1F590, U+1F595-1F596, U+1F5A4-1F5A5, U+1F5A8, U+1F5B1-1F5B2, U+1F5BC, U+1F5C2-1F5C4, U+1F5D1-1F5D3, U+1F5DC-1F5DE, U+1F5E1, U+1F5E3, U+1F5E8, U+1F5EF, U+1F5F3, U+1F5FA-1F64F, U+1F680-1F6C5, U+1F6CB-1F6D2, U+1F6E0-1F6E5, U+1F6E9, U+1F6EB-1F6EC, U+1F6F0, U+1F6F3-1F6F8, U+1F910-1F93A, U+1F93C-1F93E, U+1F940-1F945, U+1F947-1F94C, U+1F950-1F96B, U+1F980-1F997, U+1F9C0, U+1F9D0-1F9E6, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073-E0074, U+E0077, U+E007F;
+  }
+
+body {
+	font-size:82%;
+/* 絵文字はカラーになるフォントを指定する */
+	line-height: 1.35;
+	font-family: EmojiFamily, Verdana, sans-serif;
+	color:#000000;
+	background:#ffffff;
+}
+
+/* 画像は最大100%
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+a:link { color:#00f;}
+a:visited { color:#96c;}
+a:hover { color:#f30;}
+a:active { color:#f30;}
+
+
+/* layout -- レイアウト
+     各カラムの幅を変更したい場合は、ここで指定して下さい。
+     何も指定しない場合は「#sub = 250px」「#extra = 200px」となります。
+---------------------------------------------------------------------------------------------------------------- */
+div#wiki-content {}
+
+/*追加	width:800px;
+2.24 angelic-kitten
+*/
+div#wiki-content div#main {}
+
+div#wiki-content div#main div.column-inner {
+	margin:0 190px 0 230px;
+}
+
+div#wiki-content div#sub {
+	border:#8a8077 solid 1px;
+	width:220px;
+}
+div#wiki-content div#sub div.column-inner {}
+
+/*既存のテーブルつぶれ問題対策
+2.23 angelic-kitten
+div#wiki-content div#extra {
+	width:220px;
+}
+*/
+
+div#wiki-content div#extra {
+	border:#8a8077 solid 1px;
+	width:180px;
+}
+
+div#wiki-content div#extra div.column-inner {
+}
+
+
+
+/* #container -- body直下の指定
+     共通ヘッダを含む幅を指定したい場合はここで幅を指定して下さい。
+     ただし775px以下の大きさには指定しないで下さい
+---------------------------------------------------------------------------------------------------------------- */
+div#container {}
+
+/* #common-footer -- 共通フッタ
+---------------------------------------------------------------------------------------------------------------- */
+div#common-footer {
+	padding:20px 0;
+}
+div#common-footer a {}
+
+div#common-footer div.column-inner {}
+
+/* #wiki-container -- 個別ウィキ用のエリア
+     固定の共通ヘッダを除くの幅を指定したい場合はここで幅を指定して下さい。
+---------------------------------------------------------------------------------------------------------------- */
+div#wiki-container {
+width:90%;
+min-width:1150px;
+margin:20px auto;
+}
+/* #wiki-header
+     タイトルの背景に画像を指定したい場合はここで指定して下さい。
+---------------------------------------------------------------------------------------------------------------- */
+/*タイトル溶け込み防止
+ 2025.05,10 ペイリアンの色にタイトルの色を変更
+*/
+div#wiki-header {
+	height:10px;
+}
+
+div#wiki-header div.column-inner {
+	padding:40px 0 0 20px;
+}
+div#wiki-header div.column-inner-2 {}
+div#wiki-header div.column-inner-3 {}
+
+div#wiki-title {
+	margin-bottom:5px;
+}
+
+div#wiki-header div#wiki-title h1 {
+/*	font-family:MingLiU;*/
+	font-family:'arial black';
+/*	font-weight:bold;*/
+	font-size:200%;
+}
+/*タイトルの色を変えるには下のcolorコード4つ変更*/
+div#wiki-title a:link {color:#46a8f2;text-decoration:none;}
+div#wiki-title a:visited {color:#46a8f2;text-decoration:none;}
+div#wiki-title a:hover { color:#46a8f2;text-decoration:none;}
+div#wiki-title a:active {color:#46a8f2;text-decoration:none;}
+
+div#wiki-header div#wiki-description {}
+
+div#wiki-header p {}
+
+div#wiki-description p {
+	width:250px !important;
+/* 5.31 overwrite.cssによる上書き回避 
+*/
+}
+/* #wiki-menu
+---------------------------------------------------------------------------------------------------------------- */
+/*青っぽくする 2.23 angelic-kitten
+background:#fff url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_menu.gif) repeat-x 0 0;
+*/
+div#wiki-menu {
+background:#a0d8ef;
+height: 36px;
+padding: 0 20px;
+border-width: 0;
+position: sticky;
+top: 37px;
+z-index: 5;
+}
+
+ul#navigation-m {
+	font-weight:bold;
+	font-size:120%;
+	left:20px;
+	top:7px;
+}
+
+ul#navigation-m li {
+	font-weight:bold;
+	margin-right:20px;
+}
+ul#navigation-m li.top {}
+ul#navigation-m li.list {}
+ul#navigation-m li.tags {}
+ul#navigation-m li.logout {}
+ul#navigation-m li a:link { color:#fff;text-decoration:none;}
+ul#navigation-m li a:visited { color:#fff;text-decoration:none;}
+ul#navigation-m li a:hover { color:#cfcfcf;text-decoration:underline;}
+ul#navigation-m li a:active { color:#fff;text-decoration:none;}
+
+div#wiki-menu div.search-box {}
+div#wiki-menu div.search-box form {}
+div#wiki-menu div.search-box ul {}
+div#wiki-menu div.search-box ul li {}
+div#wiki-menu div.search-box ul li input.form-text {}
+div#wiki-menu div.search-box ul li input.form-button {}
+
+div#wiki-menu ul.tool-list {
+	margin-top:7px;
+}
+div#wiki-menu ul.tool-list li {}
+
+/* #wiki-content
+---------------------------------------------------------------------------------------------------------------- */
+div#wiki-content {
+	padding:15px 20px 20px;
+/*	background:#95e1fb url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg.gif) repeat-x 0 0;
+ 4.1 模様替え kitten
+	background:#95fbe1 url(https://static.seesaawiki.jp/img/usr_second/default_green/bg.gif) repeat-x 0 0; 
+*/
+/* 6.4 模様替え */
+/* 8.12	background:#202020; */
+	background:#ffffff;
+}
+
+div#wiki-content div#main {}
+div#wiki-content div#main div.column-inner {}
+
+div#wiki-content div.sidecolumn {
+position: sticky;
+top: 88px;
+height: calc(100vh - 103px);
+overflow-y: auto;
+scrollbar-width: thin;
+}
+
+div#wiki-content div.sidecolumn div.column-inner {}
+
+div#wiki-content div#sub {}
+div#wiki-content div#sub div.column-inner {}
+
+div#wiki-content div#extra {}
+div#wiki-content div#extra div.column-inner {}
+
+
+/* #main
+---------------------------------------------------------------------------------------------------------------- */
+div#main {
+	background:#fff;
+
+}
+div#main div.column-inner {}
+
+/* #main - page-container
+-------------------------------------------------------- */
+div#page-container {
+/* 6.4 模様替え kitten
+	padding:10px;
+*/
+	border:#fff solid 1px;
+
+}
+div#page-container div.box-inner {
+	margin:5px;
+}
+
+/* #main - page-header
+-------------------------------------------------------- */
+div#page-header {
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_main_top_l.gif) no-repeat 0 0;
+ 4.1 模様替え kitten */
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_green/bg_main_top_l.gif) no-repeat 0 0;
+ 6.4 */
+	padding-left:20px;
+}
+
+div#page-header div.box-inner {
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_main_top_r.gif) no-repeat 100% 0;
+ 4.1 模様替え kitten */
+/* 6.4	background:url(https://static.seesaawiki.jp/img/usr_second/default_green/bg_main_top_r.gif) no-repeat 100% 0;
+*/
+	padding:20px 20px 0 0;
+}
+
+div#page-header div.title {
+	border-bottom:#c6e9f7; solid 2px;
+	margin-bottom:5px;
+}
+
+div#page-header div.title div.inner {
+	padding:0 5px 5px;
+}
+
+div#page-header div.title h2{
+	font-size:160%;
+/*	8.12 color:#13f6fe; */
+	color:#786c78;
+	font-color:#e8db33;
+}
+div#page-header div.title h2 a {
+	color:#3399fe;
+	text-decoration:none;
+}
+div#page-header div.title h2 a:hover {
+	color:#f60;
+}
+
+div#page-header div.title h3{
+	font-size:160%;
+/*	color:#3399fe; */
+/*	8.12 	color:#2efec8; */
+	color:#8a8077;
+	
+}
+
+div#page-header div.title h4{
+	font-size:160%;
+/*	color:#3399fe; */
+/*	8.12 	color:#2efec8; */
+	color:#8a8077;
+}
+div#page-header div.title ul.tool-list {
+	position:relative;
+	margin:0;
+	padding:0;
+	list-style:none;
+	display:inline;
+	bottom:5px;
+}
+div#page-header div.title ul.tool-list li {
+	display:inline;
+	margin-left:5px;
+}
+div#page-header div.title p.history {
+	position:absolute;
+	bottom:5px;
+	right:0;
+}
+
+div#page-header div.title p.history a {
+	text-decoration:none;
+}
+
+div#page-header div.title p.history a {
+	display:block;
+	height:17px;
+	line-height:17px;
+	padding-left:17px;
+	background:url(https://static.seesaawiki.jp/img/usr_second/common/icon_history.gif) no-repeat 0 50%;
+	color:#53fcf9;
+	text-decoration:none;
+}
+
+
+div#page-header p.update {
+	font-size:90%;
+}
+div#page-header p.update a {
+/*	color:#ffffff;*/
+	color:#333;
+	text-decoration:none;
+}
+
+/* #main - page-body
+-------------------------------------------------------- */
+div#page-body {}
+/*	background:#fff url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_main_bdy_l.gif) repeat-y 0 0;
+ 4.1 模様替え kitten */
+/*	background:#fff url(https://static.seesaawiki.jp/img/usr_second/default_green/bg_main_bdy_l.gif) repeat-y 0 0;
+ 6.4 */
+	background:#fff;
+}
+
+div#page-body div.box-inner {
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_main_bdy_r.gif) repeat-y 100% 0;
+ 4.1 模様替え kitten */
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_green/bg_main_bdy_r.gif) repeat-y 100% 0;
+ 6.4 */
+	background:#fff;
+	padding:10px 20px;
+}
+
+/* 8.21 引用枠追加 */
+div.embedded-tweet {
+	border:#000000 dashed 1px;
+}
+/* 8.21 */
+
+
+/* #main - page-footer
+-------------------------------------------------------- */
+div#page-footer {
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_main_btm_l.gif) no-repeat 0 100%;
+ 4.1 模様替え kitten */
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_green/bg_main_btm_l.gif) no-repeat 0 100%;
+ 6.4 */
+	padding-left:20px;
+}
+
+div#page-footer div.box-inner {
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_blue/bg_main_btm_r.gif) no-repeat 100% 100%;
+ 4.1 模様替え kitten */
+/*	background:url(https://static.seesaawiki.jp/img/usr_second/default_green/bg_main_btm_r.gif) no-repeat 100% 100%;
+ 6.4 */
+	padding:0 20px 20px 0;
+}
+
+div#information-box {
+/* 8.12 */
+	background:#ffffff;
+	padding:5px 10px;
+	border:#99ffcd solid 1px;;
+}
+
+ul#page-posted {}
+ul#page-posted li {}
+ul#page-posted li.comment {}
+ul#page-posted li.trackback {}
+
+ul#page-category {}
+ul#page-category li {}
+ul#page-category li.title {}
+ul#page-category li.parent {}
+ul#page-category li.child {}
+
+ul#page-tags {}
+ul#page-tags li {}
+ul#page-tags li.title {}
+ul#page-tags li.tags {}
+
+ul#page-attachedfile {}
+ul#page-attachedfile li {}
+ul#page-attachedfile li.title {}
+
+div#page-footer ul.tool-list {}
+div#page-footer ul.tool-list li {}
+div#page-footer ul.tool-list li img {}
+
+
+/* #main tag
+     ユーザーが書き込むウィキタグ→htmlタグのスタイルを指定
+     プレビューの場合に必要になるので「div.user-area」に背景色を指定してください。
+     サイドカラムの色とメインカラムの色が別になる場合は、「div.sidecolumn div.user-area」で
+     サイドカラムの色も指定してください。
+---------------------------------------------------------------------------------------------------------------- */
+div.user-area {
+	background:#fff;
+}
+div.sidecolumn div.user-area {
+	background:transparent;
+}
+
+div.user-area hr {
+	color:#808080;
+	background:#808080;
+}
+div.user-area table th,
+div.user-area table td {
+	border:#000 solid 1px;
+}
+div.user-area table th {
+/*	8.12 color:#000;*/
+	color:#000;
+	background:#bfbfbf;
+}
+div.user-area table td {
+/*	8.12 color:#000;*/
+	color:#000;
+}
+div.user-area div.title-1 h3,
+div.user-area div.title-2 h4,
+div.user-area div.title-3 h5 {
+	font-size:120%;
+}
+div.user-area div.title-1 {
+	background:#87cae6;
+	padding:5px;
+}
+
+div.user-area div.title-1 h3 {
+	color:#fff;
+}
+div.user-area div.title-1 h3 a {
+	color:#ff7c89;
+}
+div.user-area div.title-1 h3 a:hover {
+	text-decoration:none;
+}
+
+div.user-area div.title-2 {
+	padding:3px;
+	border-left:#d7ecf5 solid 12px;
+	border-bottom:#d7ecf5 1px solid;
+}
+div.user-area div.title-2 h4 {
+	color:#8a8077;
+}
+div.user-area div.title-2 h4 a {
+	color:#8a8077;
+}
+div.user-area div.title-2 h4 a:hover {
+	text-decoration:none;
+}
+div.user-area div.title-3 {
+	padding:2px;
+	border-left:#5662a1 6px solid;
+	border-bottom:#5662a1 1px dashed;
+}
+
+/* 2021.11 
+*/
+div.user-area div.title-1 span {
+     display: inline-block;
+     width: 100%;
+}
+
+div.user-area div.title-2 span {
+     display: inline-block;
+     width: 100%;
+}
+
+div.user-area .wiki-section-3 {
+     margin: auto 8px;
+}
+
+
+div.user-area div.title-3 h5 {
+	color:#8a8077;
+}
+div.user-area div.title-3 h5 a {
+	color:#aaaaff;
+}
+div.user-area div.title-3 h5 a:hover {
+	text-decoration:none;
+}
+div.user-area blockquote {
+/*	8.21 白抜き対策 border:#fff dashed 1px; */
+	border:#000000 dashed 1px;
+	padding:10px;
+}
+div#main div.user-area pre.prettyprint {
+	color:#000;
+	background-color:#f3f3f3;
+	padding:10px;
+	border:#ccc solid 1px;
+}
+div.sidecolumn div.user-area pre.prettyprint {
+	padding:5px;
+}
+/* 2024.11.15 */
+div.user-area a.outlink {
+    padding-right: initial !important;
+    background: initial !important;
+}
+
+/* .sidecolumn
+---------------------------------------------------------------------------------------------------------------- */
+/* 参加者一覧
+-------------------------------------------------------- */
+div.sidecolumn ul.editorList {}
+div.sidecolumn ul.editorList li {
+	display:block;
+	float:left;
+	margin:0 7px 7px 0;
+}
+div.sidecolumn ul.editorList li img {
+	width:32px;
+	height:32px;
+}
+
+
+/* #sub
+-------------------------------------------------------- */
+div#wiki-content div#sub {}
+div#wiki-content div#sub div.column-inner {}
+
+div#sub div.form-box form {}
+div#sub div.form-box form input.form-text {}
+div#sub div.form-box form input.form-button {}
+
+
+/* #extra
+-------------------------------------------------------- */
+div#wiki-content div#extra {}
+div#wiki-content div#extra div.column-inner {}
+
+/*
+右カラムフォント縮小
+2.24 angelic-kitten
+*/
+div#wiki-content div#extra ul.child-list{ 
+padding:0,2px;
+}
+
+div#extra div.form-box form {}
+div#extra div.form-box form input.form-text {}
+div#extra div.form-box form input.form-button {}
+
+
+/* .sidecolumn
+      「extra」「sub」どちらのカラムにも共通するものはここで指定して下さい。
+-------------------------------------------------------- */
+div.sidecolumn {}
+div.sidecolumn div.column-inner {}
+
+div.side-box,div.free-box,div.sidecolumn div.form-box {
+}
+
+div.side-box div.box-inner,div.free-box div.box-inner,div.sidecolumn div.form-box div.box-inner {}
+div.side-box div.title,div.free-box div.title,div.sidecolumn div.form-box div.title {
+	background:#d7ecf5;
+	color:#151515;
+/*	font-weight:bold;*/
+	font-size:120%;
+/*	padding-top:7px;*/
+	margin-top:0px;
+	margin-bottom:12px;
+/*	border-bottom:#999 solid 1px;*/
+}
+div.side-box div.title h2,div.free-box div.title h2,div.sidecolumn div.form-box div.title h2 {
+	padding:4px 4px;
+
+}
+div.side-box div.body,div.free-box div.body,div.sidecolumn div.form-box div.body {}
+div.side-box div.body div.inner,div.free-box div.body div.inner,div.sidecolumn div.form-box div.body div.inner {}
+
+div.sidecolumn div.form-box form {}
+div.sidecolumn div.form-box form input.form-text {
+	width:130px;
+}
+div.sidecolumn div.form-box form input.form-button {
+	margin-left:3px;
+}
+
+div.sidecolumn div.ld-plugin div.inner {}
+div.sidecolumn div.ld-plugin div.inner p.count {}
+div.sidecolumn div.ld-plugin div.inner p.button {}
+
+div.side-box {}
+div.side-box div.box-inner {}
+div.side-box div.title {}
+div.side-box div.title h2 {}
+div.side-box div.body {}
+div.side-box div.body div.inner {}
+div.side-box ul {}
+div.side-box ul li {}
+div.side-box ul li span {}
+div.side-box ul.parent-list {}
+div.side-box ul.parent-list li {
+/* 8.12	color:#fff;*/
+	color:#000;
+}
+div.side-box ul.parent-list li h3 {}
+div.side-box ul.parent-list li h3 a {}
+div.side-box ul.child-list {
+	margin:0;
+}
+div.side-box ul.child-list li {
+	padding-left:12px;
+	background:url(https://static.seesaawiki.jp/img/usr_second/simple_black/dot.gif) no-repeat 0 1px;
+}
+div.side-box ul.child-list li a {}
+
+div.side-box div.tagcloud {}
+
+div.free-box {}
+div.free-box div.box-inner {}
+div.free-box div.title {}
+div.free-box div.title h2 {}
+div.free-box div.body {}
+div.free-box div.body div.inner {}
+
+div.sidecolumn div.form-box form {}
+div.sidecolumn div.form-box form input.form-text {}
+div.sidecolumn div.form-box form input.form-button {}
+div.sidecolumn div.form-box {}
+div.sidecolumn div.form-box div.box-inner {}
+div.sidecolumn div.form-box div.title {}
+div.sidecolumn div.form-box div.title h2 {}
+div.sidecolumn div.form-box div.body {}
+div.sidecolumn div.form-box div.body div.inner {}
+
+/* 「div.side-box」と並列なもの
+      「recent」更新情報「category」カテゴリ「comment」 -- リストを使用
+-------------------------------------------------------- */
+div.sidecolumn div.recent {}
+div.sidecolumn div.recent div.box-inner {}
+div.sidecolumn div.recent div.title {}
+div.sidecolumn div.recent div.title h2 {}
+div.sidecolumn div.recent div.body {}
+div.sidecolumn div.recent div.body div.inner {}
+div.sidecolumn div.recent ul {}
+div.sidecolumn div.recent ul li {}
+div.sidecolumn div.recent ul.parent-list {}
+div.sidecolumn div.recent ul.parent-list li {}
+div.sidecolumn div.recent ul.parent-list li h3 {}
+div.sidecolumn div.recent ul.parent-list li h3 a {}
+div.sidecolumn div.recent ul.child-list {}
+div.sidecolumn div.recent ul.child-list li {}
+div.sidecolumn div.recent ul.child-list li a {}
+
+div.sidecolumn div.category {}
+div.sidecolumn div.category div.box-inner {}
+div.sidecolumn div.category div.title {}
+div.sidecolumn div.category div.title h2 {}
+div.sidecolumn div.category div.body {}
+div.sidecolumn div.category div.body div.inner {}
+div.sidecolumn div.category ul {}
+div.sidecolumn div.category ul li {}
+div.sidecolumn div.category ul.parent-list {}
+div.sidecolumn div.category ul.parent-list li {}
+div.sidecolumn div.category ul.parent-list li h3 {}
+div.sidecolumn div.category ul.parent-list li h3 a {}
+div.sidecolumn div.category ul.child-list {}
+div.sidecolumn div.category ul.child-list li {}
+div.sidecolumn div.category ul.child-list li a {}
+
+div.sidecolumn div.comment {}
+div.sidecolumn div.comment div.box-inner {}
+div.sidecolumn div.comment div.title {}
+div.sidecolumn div.comment div.title h2 {}
+div.sidecolumn div.comment div.body {}
+div.sidecolumn div.comment div.body div.inner {}
+div.sidecolumn div.comment ul {}
+div.sidecolumn div.comment ul li {
+	padding-left:12px;
+	background:url(https://static.seesaawiki.jp/img/usr_second/simple_black/dot.gif) no-repeat 0 1px;
+	margin-bottom:5px;
+}
+div.sidecolumn div.comment ul li span {}
+
+
+/* コメント一覧・トラックバック一覧
+     コメントは個別ページ（個数制限あり、「#page-footer」内に配置）、コメントページ（全件表示「#page-body」内に配置）
+--------------------------------------------------------------------------------------------------------------- */
+div#comment-box,
+div#trackback-box {}
+div#comment-box div.title,
+div#trackback-box div.title {}
+div#comment-box div.title h3,
+div#trackback-box div.title h3 {}
+div#comment-box div.body,
+div#trackback-box div.body {}
+div#comment-box div.body div.text,
+div#trackback-box div.body div.text {}
+div#comment-box div.body div.text p,
+div#trackback-box div.body div.text p {}
+div#comment-box div.body div.text span.posted,
+div#trackback-box div.body div.text span.posted {}
+
+/* 個別ページ内での設定 */
+div.page-index div#comment-box {
+/*	border-top:#fff solid 1px;*/
+	border-top:#000 solid 1px;
+	padding-top:10px;
+	margin:20px auto 10px;
+}
+div.page-index div#comment-box div.title {
+	margin-bottom:5px;
+}
+div.page-index div#comment-box div.title h3 {}
+div.page-index div#comment-box div.body {}
+div.page-index div#comment-box div.body div.text {
+	margin-bottom:20px;
+}
+div.page-index div#comment-box div.body div.text p {
+	font-size:90%;
+	line-height:1.5;
+}
+div.page-index div#comment-box div.body div.text span.posted {
+	font-size:90%;
+}
+
+/* コメントページ内での設定 */
+div.page-comment div#comment-box {}
+div.page-comment div#comment-box div.title {}
+div.page-comment div#comment-box div.title h3 {}
+div.page-comment div#comment-box div.body {}
+div.page-comment div#comment-box div.body div.text {
+	margin-bottom:20px;
+}
+div.page-comment div#comment-box div.body div.text p {
+	font-size:90%;
+	line-height:1.5;
+}
+div.page-comment div#comment-box div.body div.text span.posted {
+	font-size:90%;
+}
+div.page-comment div#comment-box>.body>.text>.posted>a[href^=http] {
+	display:none;
+}
+/* トラックバックフォーム */
+div#trackback-box div.entry {}
+div#trackback-box div.entry label {}
+div#trackback-box div.entry input {}
+
+/* 投稿フォーム */
+div.page-comment div#page-body div.form-box {}
+div.page-comment div#page-body div.form-box div.title {}
+div.page-comment div#page-body div.form-box div.title h3 {}
+div.page-comment div#page-body div.form-box table {}
+div.page-comment div#page-body div.form-box table tr {}
+div.page-comment div#page-body div.form-box table th {}
+div.page-comment div#page-body div.form-box table td {}
+div.page-comment div#page-body div.form-box table td p {}
+div.page-comment div#page-body div.form-box table td input#author {}
+div.page-comment div#page-body div.form-box table td input#email {}
+div.page-comment div#page-body div.form-box table td input#url {}
+div.page-comment div#page-body div.form-box table td input#captcha {}
+div.page-comment div#page-body div.form-box table td textarea {}
+div.page-comment div#page-body div.form-box table td.button {}
+div.page-comment div#page-body div.form-box table td.button input {}
+
+/* ページ一覧
+---------------------------------------------------------------------------------------------------------------- */
+div#main div.form-box {}
+div#main div.form-box select {}
+div#main div.form-box input {}
+
+div.paging-top {}
+div.paging-bottom {}
+div.paging-top p {}
+div.paging-bottom p {}
+
+ul.paging-list {}
+ul.paging-list li {}
+ul.paging-list li.prev {}
+
+ul.page-list {}
+ul.page-list li {}
+ul.page-list li.last {}
+ul.page-list li span {}
+ul.page-list li span img {}
+
+/* 検索一覧・タグ一覧
+---------------------------------------------------------------------------------------------------------------- */
+div.page-result {}
+div.page-result div.tagcloud {}
+
+/* 検索フォーム */
+div.search-box-main {
+	height:64px;
+	border:#999 solid 1px;
+	background:#70c0ff;
+}
+div.search-box-main div.box-inner {
+	padding:0!important;
+	background:transparent!important;
+	height:64px;
+	text-align:center;
+}
+div.search-box-main div.box-inner form {
+	padding-top:7px;
+}
+div.search-box-main input {
+	vertical-align:middle;
+}
+div.search-box-main label {
+	vertical-align:middle;
+	margin:0 3px 0 2px;
+}
+div.search-box-main ul {
+	padding:0;
+	margin:3px auto 0;
+}
+div.search-box-main ul li.title {
+	color:#fff;
+}
+div.search-box-main ul li {
+	display:inline;
+}
+div.search-box-main ul li.form-text {
+	margin-left:5px;
+}
+
+div.search-box-main ul li.form-text input {}
+div.search-box-main ul li.form-text input#keywords {
+	width:300px;
+	font-size:14px;
+	padding:3px 2px 2px;
+	border:#6c6c6c solid;
+	border-width:1px 0 1px 1px;
+}
+*:first-child+html div.search-box-main ul li.form-text input#keywords {
+	padding:4px 2px 3px;
+}
+* html div.search-box-main ul li.form-text input#keywords {
+	padding:4px 2px 3px;
+}
+
+div.page-result div.tagcloud {}
+
+
+div.result-box {}
+div.result-box p.title {}
+div.result-box p.title strong {}
+div.result-box div.paging-top {}
+div.result-box div.paging-bottom {}
+
+div.result-box div.body {}
+div.result-box div.body h3.keyword {}
+div.result-box div.body p.text {}
+div.result-box div.body p.url {}
+
+/* 履歴
+     小見出し、リストはデフォルトではwikipageのカキコミエリアと同じものがでる。
+     ページ独自の指定がしたい場合はここで設定
+---------------------------------------------------------------------------------------------------------------- */
+div.page-history p {}
+div.page-history p.update {}
+div.page-history p.update img {}
+
+/* 復元ポイントリスト */
+div.page-history div.user-area ul.point-list {}
+
+/* 履歴リスト */
+div.page-history div.user-area ul.history-list {}
+
+div.page-history div.user-area div.title-1 {}
+div.page-history div.user-area div.title-1 h3 {}
+div.page-history div.user-area ul.list-1 {}
+div.page-history div.user-area ul.list-1 li {}
+
+/* 差分
+---------------------------------------------------------------------------------------------------------------- */
+div.page-diff {}
+div.page-diff div.information-box {}
+div.page-diff div.information-box p {}
+div.page-diff div.information-box p.category {}
+
+/* 差分表示・追加 */
+div.page-diff .line-add {}
+/* 差分表示・削除 */
+div.page-diff .line-delete {}
+/* 差分表示・囲み */
+div.page-diff div.diff-box {
+	color:#000;
+}
+
+/* 読者表示
+     小見出し、リストはデフォルトではwikipageのカキコミエリアと同じものがでる。
+     ページ独自の指定がしたい場合はここで設定
+---------------------------------------------------------------------------------------------------------------- */
+div.page-readmember {}
+div.page-readmember div.user-area {}
+div.page-readmember div.user-area div.title-1 {}
+div.page-readmember div.user-area div.title-1 h3 {}
+div.page-readmember div.user-area ul.list-1 {}
+div.page-readmember div.user-area ul.list-1 li {}
+
+/* 添付一覧
+---------------------------------------------------------------------------------------------------------------- */
+div.page-attachment {}
+div.page-attachment ul.page-list li.even {
+	background:transparent;
+}
+div.page-attachment ul.page-list li.odd {
+	background:#bfbfbf;
+}
+
+/* google adsense
+---------------------------------------------------------------------------------------------------------------- */
+div#main div.adsense-box {
+	background:#000;
+	margin:10px auto;
+	display:block!important;
+}
+div.sidecolumn div.adsense-box {
+	background:#000;
+	margin:0 auto 10px;
+	display:block!important;
+}
+div.adsense-box {}
+div.adsense-box p {
+	text-align:right;
+	color:#fff;
+	font-weight:bold;
+	line-height:100%;
+}
+div.adsense-box ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+div.adsense-box ul li {}
+div.adsense-box ul li a {
+	display:block;
+	text-decoration:none;
+	padding:5px;
+}
+div.adsense-box ul li a:hover {
+	background:#333;
+}
+div#main div.adsense-box ul li a {
+	line-height:1;
+	background:url(https://static.seesaawiki.jp/img/usr_second/common/icon_pr.gif) no-repeat 3px 6px;
+	padding-left:27px;
+}
+div#main div.adsense-box ul li a:hover {
+	background:#333 url(https://static.seesaawiki.jp/img/usr_second/common/icon_pr.gif) no-repeat 3px 6px;
+	padding-left:27px;
+}
+
+div.adsense-box ul li span.ads-title {
+	color:#00f;
+	font-weight:bold;
+	line-height:100%;
+}
+div.adsense-box ul li span.ads-url {
+	color:#adacac;
+	font-size:90%;
+	line-height:100%;
+}
+div.adsense-box ul li span.ads-text {
+	display:block;
+	color:#fff;
+	font-size:90%;
+	margin-top:5px;
+	line-height:100%;
+}
+
+div.adsense-main-top {}
+div.adsense-main-bottom {}
+div.adsense-sub {}
+div.adsense-extra {}
+
+/* tagcloud
+---------------------------------------------------------------------------------------------------------------- */
+div.tagcloud {}
+div.tagcloud span {}
+div.side-box div.tagcloud {
+	background:#fff;
+	padding:5px;
+}
+.tagcloud_base a:link{color:#fff;text-decoration:none;}
+.tagcloud_base a:visited{color:#fff;text-decoration:none;}
+.tagcloud_base a:active{color:#f00;text-decoration:none;}
+.tagcloud_base a:hover{color:#f00;text-decoration:underline;}
+
+.tagcloud_used a:link{color:#ffa;}
+.tagcloud_used a:visited{color:#ffa;}
+.tagcloud_used a:active{color:#f30;}
+.tagcloud_used a:hover{color:#f30;}
+
+.tagcloud_t0 a:link{color:#6cf;text-decoration:none;}
+.tagcloud_t0 a:visited{color:#6cf;text-decoration:none;}
+.tagcloud_t0 a:active{color:#f00;text-decoration:none;}
+.tagcloud_t0 a:hover{color:#f00;text-decoration:underline;}
+
+.tagcloud_t1 a:link{color:#69a2bf;}
+.tagcloud_t1 a:visited{color:#69a2bf;}
+.tagcloud_t1 a:active{color:#f30;}
+.tagcloud_t1 a:hover{color:#f30;}
+
+.tagcloud_t2 a:link{color:#4b6a7a;}
+.tagcloud_t2 a:visited{color:#4b6a7a;}
+.tagcloud_t2 a:active{color:#f30;}
+.tagcloud_t2 a:hover{color:#f30;}
+
+.tagcloud_t3 a:link{color:#435b68;}
+.tagcloud_t3 a:visited{color:#435b68;}
+.tagcloud_t3 a:active{color:#f30;}
+.tagcloud_t3 a:hover{color:#f30;}
+
+.tagcloud_t4 a:link{color:#2c5b72;}
+.tagcloud_t4 a:visited{color:#2c5b72;}
+.tagcloud_t4 a:active{color:#f30;}
+.tagcloud_t4 a:hover{color:#f30;}
+
+/* +09/11/19
+-------------------------------------------------------- */
+/* トグル
+------------------------------------- */
+div.user-area a.toggle-link-open {
+	cursor: pointer;
+	background:url(https://static.seesaawiki.jp/img/usr_second/common/design_black/icon_open.gif) no-repeat 0 0;
+}
+div.user-area a.toggle-link-close {
+	cursor: pointer;
+	background:url(https://static.seesaawiki.jp/img/usr_second/common/design_black/icon_close.gif) no-repeat 0 0;
+}
+
+/* 関連タグ
+------------------------------------- */
+div.tags-box p.title a.imageLink {
+	width:48px;
+	height:18px;
+}
+div.tags-open a.imageLink {
+	background:url(https://static.seesaawiki.jp/img/usr_second/common/design_black/btn_tag.gif) no-repeat;
+}
+div.tags-close a.imageLink {
+	background:url(https://static.seesaawiki.jp/img/usr_second/common/design_black/btn_tag_on.gif) no-repeat;
+}
+
+/* フィードボックス
+------------------------------------- */
+div.feed-box {
+	color:#fff;
+	border:none;
+	background:#000;
+	padding:0 0 5px;
+	border:#535353 solid 1px;
+	margin-bottom:10px;
+}
+div.feed-box a {
+	color:#fff;
+	text-decoration:underline;
+}
+div.feed-box a:visited {
+	color:#f3f3f3;
+}
+div.feed-box a:hover,
+div.feed-box a:active {
+	text-decoration:none;
+}
+
+div.feed-box p.title {
+	color:#fff;
+	padding:5px;
+	background:#262626;
+}
+div.feed-box p.title a {
+	color:#fff;
+	text-decoration:none;
+}
+div.feed-box p.title a:hover {
+	text-decoration:underline;
+}
+div.feed-box p.title span {
+	padding-top:5px;
+	padding-left:5px;
+	display:inline;
+	margin-right:0;
+	background:transparent;
+}
+
+/* 枠無しテーブル用 */
+div.user-area table.noborder th,
+div.user-area table.noborder td {
+  border: none;
+}
+
+/* 2022.10.01 discordサーバに話し合いの内容 kitten */
+#wiki-title a, #wiki-menu {
+    font-family: "Zen Maru Gothic", sans-serif!important;
+}
