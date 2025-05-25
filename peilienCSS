@@ -1240,6 +1240,14 @@ div.user-area table.noborder td {
   border: none;
 }
 
+/* twemoji
+------------------------------------- */
+img.emoji {
+  width: 1em;
+  height: 1em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
+}
 /* 2022.10.01 discordサーバに話し合いの内容 kitten */
 #wiki-title a, #wiki-menu {
     font-family: "Zen Maru Gothic", sans-serif!important;
